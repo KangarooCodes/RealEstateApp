@@ -1,0 +1,42 @@
+.Card-Image {
+	height: 275px;
+	width: 375px;
+	margin-top: 8px;
+	border-radius: 14px;	
+	border: none;
+}
+.Card-Body {
+	height: 520px;
+	width: 400px;
+	border: pink 2px solid;
+	border-radius: 24px;
+}
+.Card-Body:hover {
+	box-shadow: 0 0 15px 1px blueviolet;
+}
+.Card-Subtitle {
+	font-size: 26px;
+	color: blueviolet;
+	font-weight: bold;
+	text-shadow: -2px 1px 2px black;
+}
+.Card-Text {
+	font-size: 20px;
+	margin-bottom: 0;
+}
+.Card-Button {
+	background: transparent;
+	font-size: 18px;
+	color: skyblue;
+	text-shadow: 0 0 4px black;
+	border: none;
+	cursor: pointer;
+}
+.Card-Button:hover {
+	position: relative;
+	top: 1px;
+	left: 1px;
+}
+.Card-Button:active {
+	color: rgb(86, 149, 174);
+}

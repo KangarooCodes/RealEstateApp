@@ -1,0 +1,13 @@
+a { 
+	padding: 0 50px;
+	color: blueviolet;
+	text-shadow: 0 0 4px black;
+	text-decoration: none;
+	font-weight: 400;
+	font-size: 18px;
+}
+a:hover {
+	text-decoration: underline;
+	text-underline-offset: 5px;
+	text-shadow: 0 0 30px pink, 0 0 2px black;
+}
