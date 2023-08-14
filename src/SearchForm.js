@@ -28,13 +28,6 @@ const SearchForm = () => {
 		const [formError, setFormError] = useState('hidden');
 		const [noRes, setNoRes] = useState('hidden');
 	// Landing Page Resuts
-		const [bedBath, setBedBath] = useState('');
-		const [cost, setCost] = useState('');
-		const [type, setType] = useState('');
-		const [address, setAddress] = useState('default');
-		const [key, setKey] = useState('');
-		const [photo, setPhoto] = useState(Img);
-		const [sqft, setSqft] = useState('');
 		const [areResults, setAreResults] = useState(false);
 		const [showForm, setShowForm] = useState(true);
 		const [hideButton, setHideButton] = useState(true)
@@ -103,23 +96,6 @@ const SearchForm = () => {
 	const showResults = () => {
 	// Show budgeted homes in Results Area
 		
-		// for(let i=0; i<pulledHome.length;i++){
-		// 	// console.log(pulledHome[i])
-
-		// 	 resultsArr.push(
-		// 		<Results
-		// 			id={uuidv4}
-		// 			prop_id={pulledHome[i].prop_id}
-		// 			beds={pulledHome[i].beds}
-		// 			baths={pulledHome[i].baths}
-		// 			price={`$${pulledHome[i].price.toLocaleString('en-US')}`}
-		// 			prop_type={pulledHome[i].prop_type}
-		// 			sqft={pulledHome[i].sqft}
-		// 			address={pulledHome[i].address}
-		// 			photo={pulledHome[i].photo}
-		// 		/>
-		// 	)
-			
 		const resultsArr = pulledHome.map((property) => {
 			return (
 				<Results
@@ -136,13 +112,6 @@ const SearchForm = () => {
 			)
 		})
 
-			// setKey(pulledHome[i].prop_id)		
-			// setBedBath(`${pulledHome[i].beds} Beds - ${pulledHome[i].baths} Baths`)
-			// setCost(`$${pulledHome[i].price.toLocaleString('en-US')}`)
-			// setType(pulledHome[i].prop_type)
-			// setSqft(pulledHome[i].sqft)
-			// setAddress(pulledHome[i].address)
-			// setPhoto(pulledHome[i].photo)
 		console.log(pulledHome)
 		console.log(resultsArr)
 	}
@@ -166,20 +135,20 @@ const SearchForm = () => {
 					setAreResults(false)
 				} else {
 					showResults();
-				// Slowing results population to show user results refreshed, even if data is the same
-					setTimeout(() => setAreResults(true),300)
-					// setShowForm(false)
-					// setHideButton(false)
+					setTimeout(() => setAreResults(true),300) // Slowing results population to show user results refreshed,
+															  // even if data is the same
+					setShowForm(false)
+					setHideButton(false)
 				}
 			} else {
-				// setFormError('visible')
-				// setZipError('hidden') 
-				// setNoRes('hidden')
+				setFormError('visible')
+				setZipError('hidden') 
+				setNoRes('hidden')
 			}
 		} else {
-			// setZipError('visible')
-			// setFormError('hidden')
-			// setNoRes('hidden')
+			setZipError('visible')
+			setFormError('hidden')
+			setNoRes('hidden')
 		}
 	}
 
