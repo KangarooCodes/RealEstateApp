@@ -1,4 +1,9 @@
 	/* Form */
+.form-div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 form {
 	font-size: 22px;
 	border: black 3px groove;

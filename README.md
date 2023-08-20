@@ -1,3 +1,9 @@
+# Welcome To Joey's Real Estate App !
+## I'm happy you're here !!
+## See below for previews of my app
+### Scroll further to see how to use the CRA to run this
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +74,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Licensing
+
+- Copyright 2023 [Creative Tim](https://www.creative-tim.com?ref=readme-mdr)
+- Creative Tim [license](https://www.creative-tim.com/license?ref=readme-mdr)

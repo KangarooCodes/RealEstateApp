@@ -2,34 +2,46 @@
   "name": "project",
   "version": "0.1.0",
   "private": true,
+  "author": "Joey Rider",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KangarooCodes?tab=repositories"
+  },
   "dependencies": {
+    "@emotion/cache": "11.10.8",
+    "@emotion/react": "11.10.8",
+    "@emotion/styled": "11.10.8",
+    "@mui/icons-material": "5.11.16",
+    "@mui/material": "5.12.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.1",
+    "chart.js": "4.3.0",
     "flask": "^0.2.10",
     "formik": "^2.4.2",
     "nodemon": "^3.0.1",
+    "prop-types": "15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-github-btn": "1.4.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.1",
+    "react-table": "7.8.0",
     "reactstrap": "^9.2.0",
-    "web-vitals": "^2.1.4"
+    "stylis": "4.1.4",
+    "stylis-plugin-rtl": "2.1.1",
+    "web-vitals": "^2.1.4",
+    "yup": "1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-api": "cd api && flask run --bo-debugger",
-    "test-api": "cd api && flask test",
-    "build": "react-scripts build",
+    "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "start-api": "cd backend && venv/bin/flask run --no-debugger",
+    "test-api": "cd backend && flask test",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "browserslist": {
     "production": [
@@ -44,7 +56,11 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react-router-dom": "^5.3.3",
+    "prettier": "^2.8.8"
+  },
+  "overrides": {
+    "svgo": "3.0.2"
   },
   "proxy": "http://localhost:5000"
 }

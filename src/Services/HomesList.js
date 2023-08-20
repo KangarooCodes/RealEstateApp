@@ -1,3 +1,4 @@
+// prettier-ignore
 const homesList = {
     "meta": {
         "build": "3.23.181",
