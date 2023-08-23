@@ -1,4 +1,5 @@
 import "../assets/css/App.css";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -8,6 +9,10 @@ import Support from "./ContactAdmin";
 import NavBar from "./NavBar";
 
 function App() {
+  // useEffect(() => {
+  //   FlaskApp.get();
+  // }, []);
+
   return (
     <div className="App">
       <NavBar />

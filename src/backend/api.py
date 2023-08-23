@@ -1,5 +1,5 @@
 import time
-from flask import Flask;
+from flask import Flask
 
 app = Flask(__name__)
 
@@ -12,5 +12,6 @@ def get_current_time():
 # def index():
 #     return send_from_directory("react_app/build", "index.html")
 
+
 if __name__ == "__main__":
-    app.run(debug=True) 
+    app.run(debug=True)

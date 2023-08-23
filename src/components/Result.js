@@ -10,13 +10,18 @@ const Result = (props) => {
       <Card className="Card" id={props.prop_id}>
         <CardBody className="Card-Body">
           <CardTitle>
-            <CardImg alt="house" className="Card-Image" src={props.photo || Img}></CardImg>
+            <CardImg
+              alt="house"
+              className="Card-Image"
+              src={props.photo || Img}
+            ></CardImg>
           </CardTitle>
           <CardSubtitle className="Card-Subtitle">
             {props.price || "Unlisted Cost"} - {props.prop_type}
           </CardSubtitle>
           <CardText className="Card-Text">
-            {props.beds || "Unknown"} Beds - {props.baths || "Unknown"} Baths - {props.sqft || "Unknown"} sqft
+            {props.beds || "Unknown"} Beds - {props.baths || "Unknown"} Baths -{" "}
+            {props.sqft || "Unknown"} sqft
             <br />
             <br />
             {props.address}

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import homesList from "../Services/HomesList";
 import "../assets/css/SearchForm.css";
 import Results from "./Results";
 import Result from "./Result";
-import { PropertyProvider } from "./CreateContext";
 
 const SearchForm = () => {
   // Card Data For Search Homes
@@ -73,7 +71,6 @@ const SearchForm = () => {
       // Pushing homes with budget to OBJECT.
       if (propertyCost <= budget) {
         pulledHome[x] = {
-          // key: uuidv4,
           price: searchHomes[i].price_raw,
           beds: searchHomes[i].beds,
           baths: searchHomes[i].baths,
@@ -82,11 +79,11 @@ const SearchForm = () => {
           prop_type: searchHomes[i].prop_type,
           sqft: searchHomes[i].sqft_raw,
           address: searchHomes[i].address,
-          // listing_date: searchHomes[i].list_date,
         };
         x++;
       }
     }
+    console.log(pulledHome);
   };
   const showResults = () => {
     // Show budgeted homes in Results Area
@@ -104,7 +101,6 @@ const SearchForm = () => {
         />
       );
     });
-    console.log(pulledHome);
     console.log(resultsArr);
   };
   const formSubmit = (e) => {
@@ -124,9 +120,8 @@ const SearchForm = () => {
           setAreResults(false);
         } else {
           showResults();
-          setTimeout(() => setAreResults(true), 250); // Slowing results population to show user results refreshed,
-          console.log(resultsArr);
-          // even if data is the same
+          setAreResults(true);
+          // setTimeout(() => setAreResults(true), 250); // Slowing results population to show user results refreshed
           // setShowForm(false);
           // setHideButton(false);
         }
@@ -140,7 +135,6 @@ const SearchForm = () => {
       // setFormError("hidden");
       // setNoRes("hidden");
     }
-    // console.log(resultsArr);
   };
 
   return (
@@ -264,15 +258,16 @@ const SearchForm = () => {
       <button id="Search-Again" onClick={handleFormReset} hidden={hideButton}>
         Search Again
       </button>
-      {areResults !== false ? (
-        <PropertyProvider>
-          <div>
-            <p id="result-header">Results:</p>
-            <Results />
-          </div>
-        </PropertyProvider>
-      ) : // <div key={uuidv4}>TEST</div>
-      null}
+      {areResults === true ? (
+        <div>
+          <p>{pulledHome[0]}</p>
+          <ul>
+            {pulledHome.map((home) => (
+              <li>{home}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 };
