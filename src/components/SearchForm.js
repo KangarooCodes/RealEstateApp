@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import homesList from "../Services/HomesList";
 import "../assets/css/SearchForm.css";
-import Results from "./Results";
 import Result from "./Result";
+import { v4 as uuidv4 } from "uuid";
 
 const SearchForm = () => {
   // Card Data For Search Homes
   const searchHomes = homesList.listings;
   let pulledHome = [];
-  let resultsArr = [];
+  const [resultsArr, setResultsArr] = useState([]);
 
   // States
   // Search Form
@@ -67,46 +67,76 @@ const SearchForm = () => {
     let x = 0;
     for (let i = 0; i < searchHomes.length; i++) {
       const propertyCost = searchHomes[i].price_raw;
+      const beds = searchHomes[i].beds;
+      const baths = searchHomes[i].baths;
+      const prop_id = searchHomes[i].property_id;
+      const photo = searchHomes[i].photo;
+      let prop_type = searchHomes[i].prop_type;
+      const sqft = searchHomes[i].sqft_raw;
+      const street = searchHomes[i].address_new.line;
+      const city = searchHomes[i].address_new.city;
+      const zip = searchHomes[i].address_new.postal_code;
+      const state_code = searchHomes[i].address_new.state_code;
+      const realtorLink = searchHomes[i].rdc_web_url;
+
+      if (prop_type == "condo") {
+        prop_type = "Condo";
+      }
+      if (prop_type == "single_family") {
+        prop_type = "Single Family";
+      }
 
       // Pushing homes with budget to OBJECT.
-      if (propertyCost <= budget) {
+      if (propertyCost <= budget && beds >= bed && baths >= bath) {
         pulledHome[x] = {
-          price: searchHomes[i].price_raw,
-          beds: searchHomes[i].beds,
-          baths: searchHomes[i].baths,
-          prop_id: searchHomes[i].property_id,
-          photo: searchHomes[i].photo,
-          prop_type: searchHomes[i].prop_type,
-          sqft: searchHomes[i].sqft_raw,
-          address: searchHomes[i].address,
+          price: propertyCost,
+          beds: beds,
+          baths: baths,
+          prop_id: prop_id,
+          photo: photo,
+          prop_type: prop_type,
+          sqft: sqft,
+          street: street,
+          city: city,
+          zip: zip,
+          state_code: state_code,
+          realtorLink: realtorLink,
         };
         x++;
       }
     }
-    console.log(pulledHome);
+    // console.log(searchHomes[0].rdc_web_url);
   };
   const showResults = () => {
     // Show budgeted homes in Results Area
-    const resultsArr = pulledHome.map((property) => {
-      return (
-        <Result
-          prop_id={property.prop_id}
-          beds={property.beds}
-          baths={property.baths}
-          price={`$${property.price.toLocaleString("en-US")}`}
-          prop_type={property.prop_type}
-          sqft={property.sqft}
-          address={property.address}
-          photo={property.photo}
-        />
-      );
-    });
-    console.log(resultsArr);
+    setResultsArr(
+      pulledHome.map((property) => {
+        return (
+          <li>
+            <Result
+              prop_id={property.prop_id}
+              beds={property.beds}
+              baths={property.baths}
+              price={`$${property.price.toLocaleString("en-US")}`}
+              prop_type={property.prop_type}
+              sqft={property.sqft}
+              photo={property.photo}
+              street={property.street}
+              city={property.city}
+              zip={property.zip}
+              state_code={property.state_code}
+              realtorLink={property.realtorLink}
+            />
+          </li>
+        );
+      })
+    );
   };
   const formSubmit = (e) => {
     // Checks if form is filled out [properly]
     // Then removes listings above budget
     // Then uses "checkResults" To show results
+
     setAreResults(false);
     e.preventDefault();
 
@@ -117,11 +147,9 @@ const SearchForm = () => {
           setNoRes("visible");
           setFormError("hidden");
           setZipError("hidden");
-          setAreResults(false);
         } else {
           showResults();
-          setAreResults(true);
-          // setTimeout(() => setAreResults(true), 250); // Slowing results population to show user results refreshed
+          setTimeout(() => setAreResults(true), 300); // Slowing results population to show user results refreshed
           // setShowForm(false);
           // setHideButton(false);
         }
@@ -255,19 +283,12 @@ const SearchForm = () => {
           </form>
         </div>
       ) : null}
+      {/* Button is shown once search for is submitted, to return the form (with refresh) */}
       <button id="Search-Again" onClick={handleFormReset} hidden={hideButton}>
         Search Again
       </button>
-      {areResults === true ? (
-        <div>
-          <p>{pulledHome[0]}</p>
-          <ul>
-            {pulledHome.map((home) => (
-              <li>{home}</li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      {/* After Form Submission: Results Array (budgeted homes list) is displayed via State */}
+      {areResults !== false ? <div key={uuidv4}>{resultsArr}</div> : null}
     </div>
   );
 };

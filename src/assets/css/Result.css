@@ -1,3 +1,17 @@
+li {
+	list-style-type: none;
+	display: inline-block;
+	position: relative;
+	padding: 1vw 1vw;
+	height: 520px;
+	width: 400px;
+}
+ul {
+	position: relative;
+}
+.wrapper {
+	padding-top: 1.75rem;
+}
 .Card-Image {
 	height: 275px;
 	width: 375px;
