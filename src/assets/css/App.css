@@ -1,7 +1,9 @@
-html {
-  background-color: #282c34;
+* {
+  font-family: Calibri, 'Trebuchet MS', sans-serif !important;
 }
-
+html {
+  background: -webkit-gradient(linear, left top, left bottom, from(#00bfff), to(#00ffe7)) fixed;
+}
 img {
 	width: 408px;
 	height: 300px;

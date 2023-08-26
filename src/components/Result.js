@@ -15,13 +15,23 @@ const Result = (props) => {
           {props.price || "Unlisted Cost"} - {props.prop_type}
         </CardSubtitle>
         <CardText className="Card-Text">
-          {props.beds || "Unknown"} Beds - {props.baths || "Unknown"} Baths -{" "}
-          {props.sqft || "Unknown"} sqft
+          <span className={"Card-Spans"} style={{ fontWeight: "bold" }}>
+            {props.beds || "Unknown"}
+          </span>{" "}
+          Beds
+          <span className={"Card-Spans"} style={{ fontWeight: "bold" }}>
+            {props.baths || "Unknown"}
+          </span>{" "}
+          Baths
+          <span className={"Card-Spans"} style={{ fontWeight: "bold" }}>
+            {props.sqft || "Unknown"}
+          </span>{" "}
+          sqft
           <br />
           <br />
-          {props.street}, {props.city}
+          {props.street}
           <br />
-          {props.state_code} {props.zip}
+          {props.city}, {props.state_code} {props.zip}
         </CardText>
         <div className="wrapper">
           <a className="Card-Button" href={props.realtorLink}>

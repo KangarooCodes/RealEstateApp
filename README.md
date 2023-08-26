@@ -1,8 +1,9 @@
 # Welcome To Joey's Real Estate App !
-## I'm happy you're here !!
-## See below for previews of my app
+### See below for previews of my app
 ### Scroll further to see how to use the CRA to run this
 
+## Current Login Page:
+![](https://thumbnails-photos.amazon.com/v1/thumbnail/TvFDyUydSAesa6FmzD-jCQ?ownerId=A3Q37JPZZLXHPV&viewBox=1192%2C700&groupShareToken=L8n_4ePUT5edLC-rRz0T6A.iJfh_diWzbGG-X-206pHi4)
 
 # Getting Started with Create React App
 

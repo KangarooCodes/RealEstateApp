@@ -1,0 +1,88 @@
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#00bfff), to(#00ffe7)) fixed;
+}
+.App-header{
+  margin-top: 50px;
+}
+.form-signin {
+  width: 330px;
+  max-width: 330px;
+  margin: auto;
+  backdrop-filter: blur(10px);
+  /* border-top: 1px solid rgba(255, 255, 255, 0.2); */
+  /* border-left: 1px solid rgba(255, 255, 255, 0.2); */
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  background-image: linear-gradient(135deg, #17e9ad, #1d18d0);
+}
+.form-inputs {
+  width: 330px;
+  border: none;
+}
+.form-signin h1 {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 0px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+.form-signin form {
+  padding: 15px;
+}
+.form-signin form .btn {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+.form-signin form .btn:hover, .form-signin form .btn:focus {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+.form-signin form .form-control:focus {
+  border-color: #ced4da;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+}
+.form-signin .copyright {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65);
+}
+.form-signin .form-control {
+  background: rgba(255, 255, 255, 0.9);
+}
+.form-signin .form-check {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.65);
+}
+.form-signin .form-check label {
+  font-size: 0.9em;
+}
+.form-signin .form-check input {
+  margin-right: 0.5em;
+}
+.form-signin .form-check input:checked {
+  background-color: #9ce060;
+  border-color: #81c63f;
+}
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+.form-signin input[type=email] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type=password] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

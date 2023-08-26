@@ -149,19 +149,19 @@ const SearchForm = () => {
           setZipError("hidden");
         } else {
           showResults();
-          setTimeout(() => setAreResults(true), 300); // Slowing results population to show user results refreshed
-          // setShowForm(false);
-          // setHideButton(false);
+          setAreResults(true);
+          setShowForm(false);
+          setHideButton(false);
         }
       } else {
-        // setFormError("visible");
-        // setZipError("hidden");
-        // setNoRes("hidden");
+        setFormError("visible");
+        setZipError("hidden");
+        setNoRes("hidden");
       }
     } else {
-      // setZipError("visible");
-      // setFormError("hidden");
-      // setNoRes("hidden");
+      setZipError("visible");
+      setFormError("hidden");
+      setNoRes("hidden");
     }
   };
 
@@ -170,7 +170,7 @@ const SearchForm = () => {
       {showForm === true ? (
         <div className="form-div">
           <form onSubmit={formSubmit}>
-            <div>
+            <div className="Zip-Budget">
               <label htmlFor="zipSearch">5-digit Zipcode: </label>
               <input
                 type="number"
@@ -284,8 +284,12 @@ const SearchForm = () => {
         </div>
       ) : null}
       {/* Button is shown once search for is submitted, to return the form (with refresh) */}
-      <button id="Search-Again" onClick={handleFormReset} hidden={hideButton}>
-        Search Again
+      <button
+        id="Search-Again"
+        onClick={handleFormReset}
+        hidden={hideButton}
+      >
+        Click to Restart Search
       </button>
       {/* After Form Submission: Results Array (budgeted homes list) is displayed via State */}
       {areResults !== false ? <div key={uuidv4}>{resultsArr}</div> : null}

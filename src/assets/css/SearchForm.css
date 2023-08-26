@@ -1,48 +1,49 @@
-	/* Form */
-.form-div {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-form {
-	font-size: 22px;
-	border: black 3px groove;
-	padding: 15px;
-	background-color: rgb(95, 95, 95);
-	width: 400px;
-	height: 270px;
-	margin-bottom: 30px;
-}
-#form-error1, #form-error2, #form-error3 {
-	visibility: hidden;
-	padding-left: 70px;
-	text-decoration: underline;
-	text-underline-offset: 5px;
-	font-weight: 500;
-	position: absolute;
-	color:red;
-	text-shadow: 0 1px 1px black;
-	letter-spacing: 0.3px;
-}
-#Search-Again {
-	background: transparent;
-	font-size: 18px;
-	color: skyblue;
-	text-shadow: 0 0 4px black;
-	border: none;
-	cursor: pointer;
-}
-#Search-Again:hover {
-	position: relative;
-	top: 1px;
-	left: 1px;
-}
-#Search-Again:active {
-	color: rgb(86, 149, 174);
-}
-input::placeholder {
-	padding-left: 5px;
-}
+/* Form */
+	.form-div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	form {
+		font-size: 22px;
+		border: black 1px solid;
+		border-radius: 8px;
+		padding: 15px;
+		width: 400px;
+		height: 240px;
+		margin-bottom: 30px;
+		color: black;
+	}
+/* Errors */
+	#form-error1, #form-error2, #form-error3 {
+		visibility: hidden;
+		padding-left: 70px;
+		padding-top: 15px;
+		text-decoration: underline;
+		text-underline-offset: 5px;
+		font-weight: 500;
+		position: absolute;
+		color:red;
+		letter-spacing: 0.3px;
+	}
+/*  */
+	#Search-Again {
+		background: transparent;
+		font-size: 15px;
+		color: black;
+		/* text-shadow: 0 0 4px black; */
+		border: none;
+		cursor: pointer;
+	}
+	#Search-Again:hover {
+		position: relative;
+		top: 1px;
+		left: 1px;
+	}
+	#Search-Again:active {
+		color: rgb(86, 149, 174);
+	}
+
 .radio label {
 	cursor: pointer;
 	font-size: 20px;
@@ -64,12 +65,18 @@ input::placeholder {
 #zipSearch, #maxBudget {
 	float: right;
 	height: 22px;
-	width: 150px;
-	margin-left: 10px;
-	margin-top: 4px;
+	width: 110px;
+	margin-right: 20px;
+}
+.Zip-Budget {
+	margin-bottom: 15px;
 }
 input {
 	border: black 1px solid;
+}
+input::placeholder {
+	padding-left: 5px;
+	font-size:medium;
 }
 input:active {
 	border-radius: 0;
@@ -79,7 +86,8 @@ input:active {
 #form-btn {
 	margin-top: 20px;
 	width: 300px;
-	border-radius: 8%;
+	border-radius: 3px;
+	border: black 1px solid;
 	height: 28px;
 	font-size: 16px;
 }
