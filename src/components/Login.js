@@ -1,7 +1,11 @@
 import React from "react";
-import "../assets/css/Login.css";
+import "../assets/css/Forms.css";
 
 const Login = () => {
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    /// Login To Be Completed Here
+  };
   return (
     <div>
       <link
@@ -18,13 +22,18 @@ const Login = () => {
       <main class="form-signin">
         <h1 class="h3">Login</h1>
 
-        <form action="" className="form-inputs">
+        <form
+          action=""
+          className="form-inputs"
+          onSubmit={handleLoginSubmit}
+        >
           <div class="form-floating">
             <input
               type="email"
               class="form-control"
               id="floatingInput"
               placeholder="name@example.com"
+              autoComplete="email"
               required=""
             />
             <label for="floatingInput">Email address</label>
@@ -35,6 +44,7 @@ const Login = () => {
               class="form-control"
               id="floatingPassword"
               placeholder="Password"
+              autoComplete="off"
               required=""
             />
             <label for="floatingPassword">Password</label>

@@ -36,11 +36,11 @@ const NavBar = () => {
       <a onClick={handleHome} href="/">
         Home
       </a>
-      <a onClick={handleAbout} href="/about">
-        About
-      </a>
       <a onClick={handleSupport} href="/support">
         Contact Admin
+      </a>
+      <a onClick={handleAbout} href="/about">
+        Author
       </a>
     </ul>
   );

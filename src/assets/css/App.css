@@ -1,8 +1,8 @@
 * {
   font-family: Calibri, 'Trebuchet MS', sans-serif !important;
 }
-html {
-  background: -webkit-gradient(linear, left top, left bottom, from(#00bfff), to(#00ffe7)) fixed;
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#00bfff), to(#0048bba8)) fixed;
 }
 img {
 	width: 408px;
@@ -10,11 +10,13 @@ img {
 	border: black 2px solid;
 	margin-top: 50px;
 }
-
+.navBar {
+	padding-top: 25px;
+  margin-top: 0;
+}
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;

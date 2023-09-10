@@ -14,7 +14,6 @@ const SearchForm = () => {
   // Search Form
   const [zip, setZip] = useState("");
   const [budget, setBudget] = useState("");
-  const [radio, setRadio] = useState("");
   const [asIs, setAsIs] = useState("");
   const [bed, setBed] = useState("");
   const [bath, setBath] = useState("");
@@ -35,11 +34,6 @@ const SearchForm = () => {
   };
   const handleBudget = (e) => {
     setBudget(e.target.value);
-    setFormError("hidden");
-    setNoRes("hidden");
-  };
-  const radioChange = (e) => {
-    setRadio(e.target.value);
     setFormError("hidden");
     setNoRes("hidden");
   };
@@ -148,7 +142,9 @@ const SearchForm = () => {
           setFormError("hidden");
           setZipError("hidden");
         } else {
-          showResults();
+          setTimeout(() => {
+            showResults();
+          }, 300);
           setAreResults(true);
           setShowForm(false);
           setHideButton(false);
@@ -168,131 +164,99 @@ const SearchForm = () => {
   return (
     <div>
       {showForm === true ? (
-        <div className="form-div">
-          <form onSubmit={formSubmit}>
-            <div className="Zip-Budget">
-              <label htmlFor="zipSearch">5-digit Zipcode: </label>
-              <input
-                type="number"
-                id="zipSearch"
-                placeholder="city,state, zip"
-                value={zip}
-                onChange={handleZip}
-              ></input>
-            </div>
-            <div>
-              <label htmlFor="maxBudget">Your Max Budget: </label>
-              <input
-                type="number"
-                id="maxBudget"
-                placeholder="Don't include commas"
-                value={budget}
-                onChange={handleBudget}
-              ></input>
-            </div>
-            <div className="radioBath">
-              <div className="radio">
-                <label htmlFor="fullyRenovated">
-                  <input
-                    type="radio"
-                    id="fullyRenovated"
-                    name="radio"
-                    value="fullyRenovated"
-                    checked={radio === "fullyRenovated"}
-                    onChange={radioChange}
-                  ></input>
-                  Fully Renovated
-                </label>
-                <br />
-
-                <label htmlFor="fixerUpper">
-                  <input
-                    type="radio"
-                    id="fixerUpper"
-                    name="radio"
-                    value="fixerUpper"
-                    checked={radio === "fixerUpper"}
-                    onChange={radioChange}
-                  ></input>
-                  Fixer-Upper
-                </label>
-                <br />
-
-                <label htmlFor="townhouse">
-                  <input
-                    type="radio"
-                    id="townhouse"
-                    name="radio"
-                    value="townhouse"
-                    checked={radio === "townhouse"}
-                    onChange={radioChange}
-                  ></input>
-                  Townhouse
-                </label>
+        <main class="form-signin" id="search-main">
+          <div className="form-div">
+            <form onSubmit={formSubmit}>
+              <div className="Zip-Budget">
+                <label htmlFor="zipSearch">5-digit Zipcode: </label>
+                <input
+                  type="number"
+                  id="zipSearch"
+                  placeholder="zipcode"
+                  value={zip}
+                  onChange={handleZip}
+                ></input>
               </div>
-              <div className="bedBath">
-                <label htmlFor="asis">As-Is:</label>
-                <select onChange={asIsChange} id="asis" name="asis">
-                  <option></option>
-                  <option>No</option>
-                  <option>Yes</option>
-                </select>
-
-                <label htmlFor="beds">Beds: </label>
-                <select onChange={bedChange} id="beds" name="beds">
-                  <option></option>
-                  <option>1</option>
-                  <option>1.5</option>
-                  <option>2</option>
-                  <option>2.5</option>
-                  <option>3</option>
-                  <option>3.5</option>
-                  <option>4</option>
-                  <option>4.5</option>
-                  <option>5</option>
-                  <option>5.5</option>
-                  <option>6</option>
-                </select>
-                <label htmlFor="baths">Baths: </label>
-                <select onChange={bathChange} id="baths" name="baths">
-                  <option></option>
-                  <option>1</option>
-                  <option>1.5</option>
-                  <option>2</option>
-                  <option>2.5</option>
-                  <option>3</option>
-                  <option>3.5</option>
-                  <option>4</option>
-                  <option>4.5</option>
-                  <option>5</option>
-                  <option>5.5</option>
-                  <option>6</option>
-                </select>
+              <div>
+                <label htmlFor="maxBudget">Your Max Budget: </label>
+                <input
+                  type="number"
+                  id="maxBudget"
+                  placeholder="$USD"
+                  value={budget}
+                  onChange={handleBudget}
+                ></input>
               </div>
-            </div>
-            <button id="form-btn">Search</button>
-            <div id="form-error1" style={{ visibility: formError }}>
-              Please Fill out Entire Form
-            </div>
-            <div id="form-error2" style={{ visibility: zipError }}>
-              Please Enter Valid Zipcode
-            </div>
-            <div id="form-error3" style={{ visibility: noRes }}>
-              No Results. Try more options
-            </div>
-          </form>
-        </div>
+              <div className="radioBath">
+                <br />
+                <div className="bedBath">
+                  <label htmlFor="asis">As-Is:</label>
+                  <select onChange={asIsChange} id="asis" name="asis">
+                    <option></option>
+                    <option>No</option>
+                    <option>Yes</option>
+                  </select>
+                  <label htmlFor="beds">Beds: </label>
+                  <select onChange={bedChange} id="beds" name="beds">
+                    <option></option>
+                    <option>1</option>
+                    <option>1.5</option>
+                    <option>2</option>
+                    <option>2.5</option>
+                    <option>3</option>
+                    <option>3.5</option>
+                    <option>4</option>
+                    <option>4.5</option>
+                    <option>5</option>
+                    <option>5.5</option>
+                    <option>6</option>
+                  </select>
+                  <label htmlFor="baths">Baths: </label>
+                  <select onChange={bathChange} id="baths" name="baths">
+                    <option></option>
+                    <option>1</option>
+                    <option>1.5</option>
+                    <option>2</option>
+                    <option>2.5</option>
+                    <option>3</option>
+                    <option>3.5</option>
+                    <option>4</option>
+                    <option>4.5</option>
+                    <option>5</option>
+                    <option>5.5</option>
+                    <option>6</option>
+                  </select>
+                </div>
+              </div>
+              <br />
+              <button class="w-100 btn btn-lg">Search</button>
+              <div id="form-error1" style={{ visibility: formError }}>
+                Please Fill out Entire Form
+              </div>
+              <div id="form-error2" style={{ visibility: zipError }}>
+                Please Enter Valid Zipcode
+              </div>
+              <div id="form-error3" style={{ visibility: noRes }}>
+                No Results. Try more options
+              </div>
+            </form>
+          </div>
+        </main>
       ) : null}
       {/* Button is shown once search for is submitted, to return the form (with refresh) */}
       <button
-        id="Search-Again"
+        class="w-100 btn btn-lg"
         onClick={handleFormReset}
         hidden={hideButton}
       >
         Click to Restart Search
       </button>
       {/* After Form Submission: Results Array (budgeted homes list) is displayed via State */}
-      {areResults !== false ? <div key={uuidv4}>{resultsArr}</div> : null}
+      {areResults !== false ? (
+        <div id="results-div" key={uuidv4}>
+          {resultsArr}
+        </div>
+      ) : null}
     </div>
   );
 };

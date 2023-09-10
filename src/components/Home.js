@@ -1,12 +1,12 @@
 import React from "react";
 import "../assets/css/Home.css";
 import SearchForm from "./SearchForm";
+import logo from "../assets/images/logo.png";
 
 const Home = () => {
   return (
     <div>
-      <h2>FizBo</h2>
-      <h6>Make Real Estate Work For You</h6>
+      <img src={logo} alt="logo"></img>
       <SearchForm />
     </div>
   );
