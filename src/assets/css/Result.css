@@ -15,6 +15,14 @@ li div{
 ul {
 	position: relative;
 }
+.btn {
+	color: white !important;
+	text-shadow: 0 0 15px black;
+}
+.btn:active {
+	color: rgb(202, 202, 202) !important;
+	text-shadow: 0 0 15px black;
+}
 .wrapper {
 	padding-top: 0.75rem;
 }
@@ -30,21 +38,24 @@ ul {
 	height: 520px;
 	width: 400px;
 	border: transparent;
-	/* border-radius: 24px; */
-	box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+	padding-top: 10px !important;
 }
 .Card-Body:hover {
 	box-shadow: 0 0 6px -1px darkblue;
 }
 .Card-Subtitle {
 	font-size: 26px;
-	color: darkblue;
+	color: white;
+	text-shadow: 1px 1px 3px black;
 	font-weight: bold;
 	font-family: Calibri, 'Trebuchet MS', sans-serif;
 }
 .Card-Text {
 	font-size: 20px;
 	color: black;
+	text-shadow: 0 0 1px cyan;
+	font-weight: bold;
 	font-family: Calibri, 'Trebuchet MS', sans-serif;
 	margin-bottom: 0;
 }

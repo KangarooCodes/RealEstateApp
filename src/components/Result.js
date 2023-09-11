@@ -1,5 +1,12 @@
 import React from "react";
-import { Card, CardBody, CardTitle, CardText, CardImg, CardSubtitle } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
+  CardImg,
+  CardSubtitle,
+} from "reactstrap";
 import Img from "../assets/images/noImg.PNG";
 import "./SearchForm";
 import "../assets/css/Result.css";
@@ -9,25 +16,30 @@ const Result = (props) => {
     <Card className="Card" id={props.prop_id}>
       <CardBody className="Card-Body">
         <CardTitle>
-          <CardImg alt="house" className="Card-Image" src={props.photo || Img}></CardImg>
+          <CardImg
+            alt="house"
+            className="Card-Image"
+            src={props.photo || Img}
+          ></CardImg>
         </CardTitle>
         <CardSubtitle className="Card-Subtitle">
           {props.price || "Unlisted Cost"} - {props.prop_type}
         </CardSubtitle>
         <CardText className="Card-Text">
-          <span className={"Card-Spans"} style={{ fontWeight: "bold" }}>
-            {props.beds || "Unknown"}
-          </span>{" "}
+          <span className={"Card-Spans"}>{props.beds || "Unknown"}</span>{" "}
           Beds
-          <span className={"Card-Spans"} style={{ fontWeight: "bold" }}>
+          <span className={"Card-Spans"}>
             {props.baths || "Unknown"}
           </span>{" "}
           Baths
-          <span className={"Card-Spans"} style={{ fontWeight: "bold" }}>
+          <span className={"Card-Spans"}>
             {props.sqft || "Unknown"}
           </span>{" "}
           sqft
           <br />
+          <a className="Card-Button" href={props.realtorLink}>
+            Book Appointment
+          </a>
           <br />
           {props.street}
           <br />
@@ -35,7 +47,7 @@ const Result = (props) => {
         </CardText>
         <div className="wrapper">
           <a className="Card-Button" href={props.realtorLink}>
-            More Details
+            View on Realtor.com
           </a>
         </div>
       </CardBody>

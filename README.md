@@ -5,6 +5,18 @@
 ## Current Login Page:
 ![](https://thumbnails-photos.amazon.com/v1/thumbnail/TvFDyUydSAesa6FmzD-jCQ?ownerId=A3Q37JPZZLXHPV&viewBox=1192%2C700&groupShareToken=L8n_4ePUT5edLC-rRz0T6A.iJfh_diWzbGG-X-206pHi4)
 
+## Current Home Page:
+![](https://thumbnails-photos.amazon.com/v1/thumbnail/jqBLFuGfTWeZGxxUhaODUQ?ownerId=A3Q37JPZZLXHPV&viewBox=954%2C700&groupShareToken=Me48oRjFQ6uqDUmjNCEP-Q.h_KXAn-A02dTGKxcOE31Tv)
+
+To get this application running, make sure you do the following in the Terminal:
+
+1. `python3 -m venv venv`
+2. `source venv/bin/activate`
+3. `pip install -r requirements.txt`
+4. `sudo service postgresql start`
+5. `createdb real-estate-app`
+7. `flask run`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
