@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, request, render_template, session, make_response
 from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db
+
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -18,6 +19,13 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
 
-@app.route('/api')
-def get_home():
+@app.route('/')
+def index():
+    session['username'] = 'TestUsername1'
+    session['leaderboard'] = ['TopScore', 'SecondScore', 'ThirdScore']
+    return render_template("index.html")
+
+
+@app.route('/api/users')
+def get_users():
     return {''}

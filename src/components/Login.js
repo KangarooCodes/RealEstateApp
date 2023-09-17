@@ -4,7 +4,6 @@ import "../assets/css/Forms.css";
 const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    /// Login To Be Completed Here
   };
   return (
     <div>

@@ -1,30 +1,28 @@
-import React, { useState } from "react";
-import homesList from "../Services/HomesList";
+import React, { useEffect, useState } from "react";
 import "../assets/css/SearchForm.css";
 import Result from "./Result";
 import { v4 as uuidv4 } from "uuid";
 
 const SearchForm = () => {
-  // Card Data For Search Homes
-  const searchHomes = homesList.listings;
-  let pulledHome = [];
-  const [resultsArr, setResultsArr] = useState([]);
-
   // States
-  // Search Form
+  // Search Formnores
   const [zip, setZip] = useState("");
   const [budget, setBudget] = useState("");
-  const [asIs, setAsIs] = useState("");
   const [bed, setBed] = useState("");
   const [bath, setBath] = useState("");
   // Error Handling
   const [zipError, setZipError] = useState("hidden");
-  const [formError, setFormError] = useState("hidden");
   const [noRes, setNoRes] = useState("hidden");
   // Landing Page Resuts
   const [areResults, setAreResults] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [hideButton, setHideButton] = useState(true);
+
+  // Card Data For Search Homes
+  let pulledHome = [];
+  const [resultsArr, setResultsArr] = useState([]);
+  const [data, setData] = useState([]);
+  // const apiBudget = Number(budget);
 
   // Form Handling
   const handleZip = (e) => {
@@ -34,79 +32,83 @@ const SearchForm = () => {
   };
   const handleBudget = (e) => {
     setBudget(e.target.value);
-    setFormError("hidden");
-    setNoRes("hidden");
-  };
-  const asIsChange = (e) => {
-    setAsIs(e.target.value);
-    setFormError("hidden");
     setNoRes("hidden");
   };
   const bedChange = (e) => {
     setBed(e.target.value);
-    setFormError("hidden");
     setNoRes("hidden");
   };
   const bathChange = (e) => {
     setBath(e.target.value);
-    setFormError("hidden");
     setNoRes("hidden");
   };
   const handleFormReset = () => {
     window.location.reload();
+    setNoRes("hidden");
   };
 
-  const budgetFilter = () => {
+  const budgetFilter = (data) => {
     // Showing listings under max budget provided by user.
     let x = 0;
-    for (let i = 0; i < searchHomes.length; i++) {
-      const propertyCost = searchHomes[i].price_raw;
-      const beds = searchHomes[i].beds;
-      const baths = searchHomes[i].baths;
-      const prop_id = searchHomes[i].property_id;
-      const photo = searchHomes[i].photo;
-      let prop_type = searchHomes[i].prop_type;
-      const sqft = searchHomes[i].sqft_raw;
-      const street = searchHomes[i].address_new.line;
-      const city = searchHomes[i].address_new.city;
-      const zip = searchHomes[i].address_new.postal_code;
-      const state_code = searchHomes[i].address_new.state_code;
-      const realtorLink = searchHomes[i].rdc_web_url;
 
-      if (prop_type == "condo") {
-        prop_type = "Condo";
-      }
-      if (prop_type == "single_family") {
-        prop_type = "Single Family";
-      }
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].primary_photo !== null) {
+        const propertyCost = data[i].list_price;
+        const beds = data[i].description.beds;
+        const baths = data[i].description.baths;
+        const prop_id = data[i].property_id;
+        const photo = data[i].primary_photo.href.slice(0, -5) + "od.jpg";
+        let prop_type = data[i].description.type;
+        let sqft = data[i].description.sqft;
+        const street = data[i].location.address.line;
+        const city = data[i].location.address.city;
+        const zip = data[i].location.address.postal_code;
+        const state_code = data[i].location.address.state_code;
+        const realtorLink = data[i].href;
 
-      // Pushing homes with budget to OBJECT.
-      if (propertyCost <= budget && beds >= bed && baths >= bath) {
-        pulledHome[x] = {
-          price: propertyCost,
-          beds: beds,
-          baths: baths,
-          prop_id: prop_id,
-          photo: photo,
-          prop_type: prop_type,
-          sqft: sqft,
-          street: street,
-          city: city,
-          zip: zip,
-          state_code: state_code,
-          realtorLink: realtorLink,
-        };
-        x++;
+        if (prop_type == "condos") {
+          prop_type = "Condo";
+        } else if (prop_type == "single_family") {
+          prop_type = "Single Family";
+        } else if (prop_type == "land") {
+          prop_type = "Land";
+          sqft = data[i].description.lot_sqft;
+        } else if (prop_type == "townhomes") {
+          prop_type = "Townhouse";
+          sqft = data[i].description.lot_sqft;
+        }
+
+        // Pushing homes with budget to OBJECT.
+        if (
+          (propertyCost <= budget && beds >= bed && baths >= bath) ||
+          beds == null ||
+          baths == null
+        ) {
+          pulledHome[x] = {
+            price: propertyCost,
+            beds: beds,
+            baths: baths,
+            prop_id: prop_id,
+            photo: photo,
+            prop_type: prop_type,
+            sqft: sqft,
+            street: street,
+            city: city,
+            zip: zip,
+            state_code: state_code,
+            realtorLink: realtorLink,
+          };
+          x++;
+        }
       }
     }
-    // console.log(searchHomes[0].rdc_web_url);
   };
   const showResults = () => {
     // Show budgeted homes in Results Area
     setResultsArr(
       pulledHome.map((property) => {
         return (
-          <li>
+          <li key={uuidv4()}>
             <Result
               prop_id={property.prop_id}
               beds={property.beds}
@@ -126,37 +128,69 @@ const SearchForm = () => {
       })
     );
   };
+  // API CALL
+  async function listProperties() {
+    const url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
+    const options = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-RapidAPI-Key":
+          "c2b8ad1716msh7ea6fca6ac3b8dcp19df44jsnb9fedbb1b4a3",
+        "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
+      },
+      body: JSON.stringify({
+        list_price: { max: Number(budget), min: 0 },
+        limit: 100,
+        offset: 0,
+        baths: { min: { bath } },
+        beds: { min: { bed } },
+        postal_code: `${zip}`,
+        status: ["for_sale"],
+        sort: {
+          direction: "asc",
+          field: "list_price",
+        },
+      }),
+    };
+    try {
+      const response = await fetch(url, options);
+      if (response.status === 200) {
+        return await response.json();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    budgetFilter(data);
+    showResults();
+  }, [data]);
+
   const formSubmit = (e) => {
     // Checks if form is filled out [properly]
     // Then removes listings above budget
-    // Then uses "checkResults" To show results
-
-    setAreResults(false);
     e.preventDefault();
 
+    // setTimeout(() => {
+    //   setNoRes("visible");
+    // }, 2000);
+    setAreResults(false);
+
     if (zip.length === 5) {
-      if (asIs !== "" && bed !== "" && bath !== "" && budget !== "") {
-        budgetFilter();
-        if (pulledHome.length <= 0) {
-          setNoRes("visible");
-          setFormError("hidden");
-          setZipError("hidden");
-        } else {
-          setTimeout(() => {
-            showResults();
-          }, 300);
-          setAreResults(true);
-          setShowForm(false);
-          setHideButton(false);
-        }
+      if (bed !== "" && bath !== "" && budget !== "") {
+        listProperties()
+          .then((res) => setData(res.data.home_search.results))
+          .then(setAreResults(true));
+        // .then(setShowForm(false))
+        // .then(setHideButton(false))
       } else {
-        setFormError("visible");
         setZipError("hidden");
         setNoRes("hidden");
       }
     } else {
       setZipError("visible");
-      setFormError("hidden");
       setNoRes("hidden");
     }
   };
@@ -164,7 +198,7 @@ const SearchForm = () => {
   return (
     <div>
       {showForm === true ? (
-        <main class="form-signin" id="search-main">
+        <main className="form-signin" id="search-main">
           <div className="form-div">
             <form onSubmit={formSubmit}>
               <div className="Zip-Budget">
@@ -190,15 +224,10 @@ const SearchForm = () => {
               <div className="radioBath">
                 <br />
                 <div className="bedBath">
-                  <label htmlFor="asis">As-Is:</label>
-                  <select onChange={asIsChange} id="asis" name="asis">
-                    <option></option>
-                    <option>No</option>
-                    <option>Yes</option>
-                  </select>
                   <label htmlFor="beds">Beds: </label>
                   <select onChange={bedChange} id="beds" name="beds">
                     <option></option>
+                    <option>0</option>
                     <option>1</option>
                     <option>1.5</option>
                     <option>2</option>
@@ -214,6 +243,7 @@ const SearchForm = () => {
                   <label htmlFor="baths">Baths: </label>
                   <select onChange={bathChange} id="baths" name="baths">
                     <option></option>
+                    <option>0</option>
                     <option>1</option>
                     <option>1.5</option>
                     <option>2</option>
@@ -229,10 +259,7 @@ const SearchForm = () => {
                 </div>
               </div>
               <br />
-              <button class="w-100 btn btn-lg">Search</button>
-              <div id="form-error1" style={{ visibility: formError }}>
-                Please Fill out Entire Form
-              </div>
+              <button className="w-100 btn btn-lg">Search</button>
               <div id="form-error2" style={{ visibility: zipError }}>
                 Please Enter Valid Zipcode
               </div>
@@ -245,17 +272,15 @@ const SearchForm = () => {
       ) : null}
       {/* Button is shown once search for is submitted, to return the form (with refresh) */}
       <button
-        class="w-100 btn btn-lg"
+        className="w-100 btn btn-lg"
         onClick={handleFormReset}
         hidden={hideButton}
       >
-        Click to Restart Search
+        Search Again
       </button>
       {/* After Form Submission: Results Array (budgeted homes list) is displayed via State */}
       {areResults !== false ? (
-        <div id="results-div" key={uuidv4}>
-          {resultsArr}
-        </div>
+        <div id="results-div">{resultsArr}</div>
       ) : null}
     </div>
   );

@@ -1,14 +1,18 @@
 .navBar a { 
-	margin: 0 50px;
-	color: rgb(0, 51, 255);
-	/* text-shadow: 0 0 3px black; */
+	margin: 0 15px;
+	color: white;
+	text-shadow: 1px 1px 3px black;
 	text-decoration: none;
 	font-weight: 500;
 	font-size: 20px;
 	font-family: Calibri, 'Trebuchet MS', sans-serif;
+	float: right;
+	box-shadow: 925px 0px 10px 1px black;
 }
 .navBar a:hover,.navBar a:active {
-	text-decoration: underline overline;
+	text-decoration: underline;
 	text-underline-offset: 7px;
 	text-shadow: none;
+	color: white;
+	text-shadow: 1px 1px 3px black;
 }

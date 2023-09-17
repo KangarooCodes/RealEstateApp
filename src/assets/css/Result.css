@@ -15,6 +15,10 @@ li div{
 ul {
 	position: relative;
 }
+.Card-Banner {
+	margin-top: 20px;
+	background: rgba(0, 100, 255, 0.2) !important;
+}
 .btn {
 	color: white !important;
 	text-shadow: 0 0 15px black;
@@ -24,7 +28,7 @@ ul {
 	text-shadow: 0 0 15px black;
 }
 .wrapper {
-	padding-top: 0.75rem;
+	padding-top: 0.55rem;
 }
 .Card-Image {
 	height: 275px;
@@ -62,8 +66,10 @@ ul {
 .Card-Button {
 	background: transparent;
 	font-size: 18px;
-	color: blue;
+	color: white;
+	text-shadow: 1px 1px 3px black !important;
 	font-family: Calibri, 'Trebuchet MS', sans-serif;
+	text-shadow: none;
 	border: none;
 	cursor: pointer;
 }
@@ -71,9 +77,11 @@ ul {
 	position: relative;
 	top: 0.5px;
 	left: 0.5px;
+	color: darkgrey;
 }
 .Card-Button:active {
-	color: darkblue;
+	color: black;
+	text-shadow: 0 1px 1px white !important;
 }
 .Card-Spans {
 	padding-left: 30px;

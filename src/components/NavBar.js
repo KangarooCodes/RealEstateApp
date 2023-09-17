@@ -16,33 +16,26 @@ const NavBar = () => {
     e.preventDefault();
     history.push("/");
   };
-  const handleAbout = (e) => {
-    e.preventDefault();
-    history.push("/about");
-  };
   const handleSupport = (e) => {
     e.preventDefault();
     history.push("/support");
   };
 
   return (
-    <ul className="navBar">
-      <a onClick={handleLogin} href="/login">
-        Login
-      </a>
+    <div className="navBar">
       <a onClick={handleSignup} href="/signup">
         Sign-Up
       </a>
-      <a onClick={handleHome} href="/">
-        Home
+      <a onClick={handleLogin} href="/login">
+        Login
       </a>
       <a onClick={handleSupport} href="/support">
         Contact Admin
       </a>
-      <a onClick={handleAbout} href="/about">
-        Author
+      <a onClick={handleHome} href="/">
+        Home
       </a>
-    </ul>
+    </div>
   );
 };
 
