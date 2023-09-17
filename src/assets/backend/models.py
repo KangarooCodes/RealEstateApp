@@ -17,7 +17,7 @@ class User(db.Model):
     property_id = db.Column(db.String(10))
     address_id = db.Column(db.String(10))
     username = db.Column(db.String(25))
-    image = db.Columnb(db.String)
+    image = db.Column(db.String)
     password = db.Column(db.String(10))
     bio = db.Column(db.String(200))
     area = db.Column(db.Integer)

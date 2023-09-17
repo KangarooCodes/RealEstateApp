@@ -135,8 +135,7 @@ const SearchForm = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key":
-          "c2b8ad1716msh7ea6fca6ac3b8dcp19df44jsnb9fedbb1b4a3",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
       },
       body: JSON.stringify({
@@ -159,7 +158,7 @@ const SearchForm = () => {
         return await response.json();
       }
     } catch (err) {
-      console.error(err);
+      console.error(`There was a problem with the fetch operation: `, err);
     }
   }
 

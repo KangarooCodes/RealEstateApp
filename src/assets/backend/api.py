@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, make_response
+from flask import Flask, render_template, session, make_response
 from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db
@@ -28,4 +28,4 @@ def index():
 
 @app.route('/api/users')
 def get_users():
-    return {''}
+    return 'Users'
