@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/SearchForm.css";
 import Result from "./Result";
 import { v4 as uuidv4 } from "uuid";
+import REACT_APP_API_KEY from "./apikey.js";
 
 const SearchForm = () => {
   // States
@@ -22,7 +23,6 @@ const SearchForm = () => {
   let pulledHome = [];
   const [resultsArr, setResultsArr] = useState([]);
   const [data, setData] = useState([]);
-  // const apiBudget = Number(budget);
 
   // Form Handling
   const handleZip = (e) => {
@@ -135,7 +135,7 @@ const SearchForm = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Key": REACT_APP_API_KEY,
         "X-RapidAPI-Host": "realty-in-us.p.rapidapi.com",
       },
       body: JSON.stringify({

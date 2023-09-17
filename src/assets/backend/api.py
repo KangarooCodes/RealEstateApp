@@ -6,6 +6,7 @@ from models import db, connect_db
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///real-estate-app'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
