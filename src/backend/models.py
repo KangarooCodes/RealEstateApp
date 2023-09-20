@@ -13,7 +13,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     password = db.Column(db.Binary(60), nullable=False)
-    name = db.Column(db.String(255), nullable=False, unique=True)
+    name = db.Column(db.String(255), nullable=False)
     property_id = db.Column(db.String(255))
     # favorites = db.Column(db.String)
 
