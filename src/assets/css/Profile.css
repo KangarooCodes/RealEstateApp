@@ -1,0 +1,14 @@
+.profile {
+	width: 85vw;
+	max-width: 85vw;
+	height: 85vh;
+}
+#profile-image {
+	width: 176px;
+	max-width: 176px;
+	height: 176px;
+	max-height: 176px;
+	box-shadow: 0 0 20px -2px black;
+	position: relative;
+	top: 1vh;
+}

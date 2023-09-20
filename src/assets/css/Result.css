@@ -37,6 +37,7 @@ ul {
 	margin-bottom: 0;
 	border-radius: 2px;	
 	border: none;
+	cursor: pointer;
 }
 .Card-Body {
 	height: 520px;
@@ -54,6 +55,10 @@ ul {
 	text-shadow: 1px 1px 3px black;
 	font-weight: bold;
 	font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+.cost {
+	color: lightgreen;
+	text-shadow: 2px 2px 1px black
 }
 .Card-Text {
 	font-size: 20px;
@@ -85,4 +90,16 @@ ul {
 }
 .Card-Spans {
 	padding-left: 30px;
+}
+.fav {
+	position: absolute;
+	top: 4%;
+	left: 90%;
+	opacity: 0.3;
+	z-index: 2;
+	filter: grayscale(1);
+}
+.card-title:hover .fav{
+	opacity: 1;
+	filter: grayscale(0);
 }

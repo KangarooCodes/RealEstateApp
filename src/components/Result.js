@@ -21,11 +21,18 @@ const Result = (props) => {
               alt="house"
               className="Card-Image"
               src={props.photo || noImg}
+              // title="Add To Favorites!"
             ></CardImg>
+            <div className="fav"></div>
+            {/* <div className="fav">❤️</div> */}
           </CardTitle>
           <div className="Card-Banner">
             <CardSubtitle className="Card-Subtitle">
-              {props.price || "Unlisted Cost"} - {props.prop_type}
+              <span className="cost">
+                {" "}
+                {props.price || "Unlisted Cost"}
+              </span>{" "}
+              - {props.prop_type}
             </CardSubtitle>
             <CardText className="Card-Text">
               <span className={"Card-Spans"}>{props.beds || "N/A"}</span>{" "}

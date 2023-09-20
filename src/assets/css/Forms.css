@@ -16,6 +16,12 @@
   width: 330px;
   border: none;
 }
+.register {
+  height: 375px;
+}
+.login {
+  height: 320px;
+}
 .form-signin h1 {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);

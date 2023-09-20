@@ -3,34 +3,34 @@ import React from "react";
 const AdminSupport = () => {
   return (
     <div>
-      <main class="form-signin">
-        <h1 class="h3">Contact Admin</h1>
+      <main className="form-signin">
+        <h1 className="h3">Contact Admin</h1>
 
         <form action="" className="form-inputs">
-          <div class="form-floating">
+          <div className="form-floating">
             <input
               type="email"
-              class="form-control"
+              className="form-control"
               id="floatingInput"
               placeholder="name@example.com"
               autoComplete="email"
               required=""
             />
-            <label for="floatingInput">Email address</label>
+            <label htmlFor="floatingInput">Email address</label>
           </div>
-          <div class="form-floating">
+          <div className="form-floating">
             <input
               type="message"
-              class="form-control"
+              className="form-control"
               id="floatingPassword"
               placeholder="Message"
               autoComplete="off"
               required=""
             />
-            <label for="floatingPassword">Message</label>
+            <label htmlFor="floatingPassword">Message</label>
           </div>
           <br />
-          <button class="w-100 btn btn-lg" type="submit">
+          <button className="w-100 btn btn-lg" type="submit">
             Send Message
           </button>
         </form>

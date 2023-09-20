@@ -2,43 +2,54 @@ import React from "react";
 import "../assets/css/Forms.css";
 
 const Signup = () => {
-  const handleCreateSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    /// Account Creation To Be Completed Here
+    fetch("http://localhost:5000/api/users")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data = ", data);
+      });
   };
   return (
     <div>
-      <main class="form-signin">
-        <h1 class="h3">Create Account</h1>
-        <form
-          action=""
-          className="form-inputs"
-          onSubmit={handleCreateSubmit}
-        >
-          <div class="form-floating">
+      <main className="form-signin register">
+        <h1 className="h3">Create Account</h1>
+        <form action="" className="form-inputs" onSubmit={handleRegister}>
+          <div className="form-floating">
             <input
-              type="email"
-              class="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-              autoComplete="email"
+              type="Email"
+              className="form-control"
+              id="floatingEmail"
+              placeholder="Email"
+              autoComplete="Email"
               required=""
             />
-            <label for="floatingInput">Email address</label>
+            <label htmlFor="floatingInput">Email</label>
           </div>
-          <div class="form-floating">
+          <div className="form-floating">
+            <input
+              type="username"
+              className="form-control"
+              id="floatingUsername"
+              placeholder="Username"
+              autoComplete="Username"
+              required=""
+            />
+            <label htmlFor="floatingInput">Username</label>
+          </div>
+          <div className="form-floating">
             <input
               type="password"
-              class="form-control"
+              className="form-control"
               id="floatingPassword"
               placeholder="Password"
               autoComplete="off"
               required=""
             />
-            <label for="floatingPassword">Password</label>
+            <label htmlFor="floatingPassword">Password</label>
           </div>
           <br />
-          <button class="w-100 btn btn-lg" type="submit">
+          <button className="w-100 btn btn-lg" type="submit">
             Sign in
           </button>
         </form>

@@ -6,7 +6,7 @@ import REACT_APP_API_KEY from "./apikey.js";
 
 const SearchForm = () => {
   // States
-  // Search Formnores
+  // Search Form
   const [zip, setZip] = useState("");
   const [budget, setBudget] = useState("");
   const [bed, setBed] = useState("");
@@ -65,6 +65,7 @@ const SearchForm = () => {
         const zip = data[i].location.address.postal_code;
         const state_code = data[i].location.address.state_code;
         const realtorLink = data[i].href;
+        const agent_email = data[i].advertisers[0].email;
 
         if (prop_type == "condos") {
           prop_type = "Condo";
@@ -97,6 +98,7 @@ const SearchForm = () => {
             zip: zip,
             state_code: state_code,
             realtorLink: realtorLink,
+            agent_email: agent_email,
           };
           x++;
         }

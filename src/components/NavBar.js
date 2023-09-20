@@ -20,6 +20,10 @@ const NavBar = () => {
     e.preventDefault();
     history.push("/support");
   };
+  const handleProfile = (e) => {
+    e.preventDefault();
+    history.push("/profile");
+  };
 
   return (
     <div className="navBar">
@@ -32,6 +36,9 @@ const NavBar = () => {
       <a onClick={handleSupport} href="/support">
         Contact Admin
       </a>
+      {/* <a onClick={handleProfile} href="/profile">
+        Profile
+      </a> */}
       <a onClick={handleHome} href="/">
         Home
       </a>

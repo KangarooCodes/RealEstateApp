@@ -4,6 +4,14 @@ import "../assets/css/Forms.css";
 const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
+    fetch("http://localhost:5000/api/login", {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data = ", data);
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <div>
@@ -18,53 +26,57 @@ const Login = () => {
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"
       ></script>
-      <main class="form-signin">
-        <h1 class="h3">Login</h1>
+      <main className="form-signin login">
+        <h1 className="h3">Login</h1>
 
         <form
           action=""
           className="form-inputs"
           onSubmit={handleLoginSubmit}
         >
-          <div class="form-floating">
+          <div className="form-floating">
             <input
-              type="email"
-              class="form-control"
+              type="Email"
+              className="form-control"
               id="floatingInput"
-              placeholder="name@example.com"
-              autoComplete="email"
+              placeholder="Email"
+              autoComplete="Email"
               required=""
             />
-            <label for="floatingInput">Email address</label>
+            <label htmlFor="floatingInput">Email</label>
           </div>
-          <div class="form-floating">
+          <div className="form-floating">
             <input
               type="password"
-              class="form-control"
+              className="form-control"
               id="floatingPassword"
               placeholder="Password"
               autoComplete="off"
               required=""
             />
-            <label for="floatingPassword">Password</label>
+            <label htmlFor="floatingPassword">Password</label>
           </div>
 
-          <div class="checkbox mb-3">
-            <div class="form-check form-switch">
+          {/* <div className="checkbox mb-3">
+            <div className="form-check form-switch">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value="1"
                 name="remember_me"
                 id="rememberMeSwitch"
               />
-              <label class="form-check-label" for="rememberMeSwitch">
+              <label
+                className="form-check-label"
+                htmlFor="rememberMeSwitch"
+              >
                 {" "}
                 Remember me
               </label>
             </div>
-          </div>
-          <button class="w-100 btn btn-lg" type="submit">
+          </div> */}
+          <br />
+          <button className="w-100 btn btn-lg" type="submit">
             Sign in
           </button>
         </form>
