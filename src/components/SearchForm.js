@@ -11,13 +11,12 @@ const SearchForm = () => {
   const [budget, setBudget] = useState("");
   const [bed, setBed] = useState("");
   const [bath, setBath] = useState("");
+  const [loaded, setLoaded] = useState(false);
   // Error Handling
   const [zipError, setZipError] = useState("hidden");
   const [noRes, setNoRes] = useState("hidden");
   // Landing Page Resuts
-  const [areResults, setAreResults] = useState(false);
-  const [showForm, setShowForm] = useState(true);
-  const [hideButton, setHideButton] = useState(true);
+  // const [areResults, setAreResults] = useState(false);
 
   // Card Data For Search Homes
   let pulledHome = [];
@@ -107,6 +106,7 @@ const SearchForm = () => {
   };
   const showResults = () => {
     // Show budgeted homes in Results Area
+
     setResultsArr(
       pulledHome.map((property) => {
         return (
@@ -132,6 +132,7 @@ const SearchForm = () => {
   };
   // API CALL
   async function listProperties() {
+    setLoaded(false);
     const url = "https://realty-in-us.p.rapidapi.com/properties/v3/list";
     const options = {
       method: "POST",
@@ -157,7 +158,7 @@ const SearchForm = () => {
     try {
       const response = await fetch(url, options);
       if (response.status === 200) {
-        return await response.json();
+        return setLoaded(true), await response.json();
       }
     } catch (err) {
       console.error(`There was a problem with the fetch operation: `, err);
@@ -174,18 +175,12 @@ const SearchForm = () => {
     // Then removes listings above budget
     e.preventDefault();
 
-    // setTimeout(() => {
-    //   setNoRes("visible");
-    // }, 2000);
-    setAreResults(false);
-
     if (zip.length === 5) {
       if (bed !== "" && bath !== "" && budget !== "") {
-        listProperties()
-          .then((res) => setData(res.data.home_search.results))
-          .then(setAreResults(true));
-        // .then(setShowForm(false))
-        // .then(setHideButton(false))
+        listProperties().then((res) =>
+          setData(res.data.home_search.results)
+        );
+        // .then(setAreResults(true));
       } else {
         setZipError("hidden");
         setNoRes("hidden");
@@ -198,91 +193,81 @@ const SearchForm = () => {
 
   return (
     <div>
-      {showForm === true ? (
-        <main className="form-signin" id="search-main">
-          <div className="form-div">
-            <form onSubmit={formSubmit}>
-              <div className="Zip-Budget">
-                <label htmlFor="zipSearch">5-digit Zipcode: </label>
-                <input
-                  type="number"
-                  id="zipSearch"
-                  placeholder="zipcode"
-                  value={zip}
-                  onChange={handleZip}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="maxBudget">Your Max Budget: </label>
-                <input
-                  type="number"
-                  id="maxBudget"
-                  placeholder="$USD"
-                  value={budget}
-                  onChange={handleBudget}
-                ></input>
-              </div>
-              <div className="radioBath">
-                <br />
-                <div className="bedBath">
-                  <label htmlFor="beds">Beds: </label>
-                  <select onChange={bedChange} id="beds" name="beds">
-                    <option></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>1.5</option>
-                    <option>2</option>
-                    <option>2.5</option>
-                    <option>3</option>
-                    <option>3.5</option>
-                    <option>4</option>
-                    <option>4.5</option>
-                    <option>5</option>
-                    <option>5.5</option>
-                    <option>6</option>
-                  </select>
-                  <label htmlFor="baths">Baths: </label>
-                  <select onChange={bathChange} id="baths" name="baths">
-                    <option></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>1.5</option>
-                    <option>2</option>
-                    <option>2.5</option>
-                    <option>3</option>
-                    <option>3.5</option>
-                    <option>4</option>
-                    <option>4.5</option>
-                    <option>5</option>
-                    <option>5.5</option>
-                    <option>6</option>
-                  </select>
-                </div>
-              </div>
+      <main className="form-signin" id="search-main">
+        <div className="form-div">
+          <form onSubmit={formSubmit}>
+            <div className="Zip-Budget">
+              <label htmlFor="zipSearch">5-digit Zipcode: </label>
+              <input
+                type="number"
+                id="zipSearch"
+                placeholder="zipcode"
+                value={zip}
+                onChange={handleZip}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="maxBudget">Your Max Budget: </label>
+              <input
+                type="number"
+                id="maxBudget"
+                placeholder="$USD"
+                value={budget}
+                onChange={handleBudget}
+              ></input>
+            </div>
+            <div className="radioBath">
               <br />
-              <button className="w-100 btn btn-lg">Search</button>
-              <div id="form-error2" style={{ visibility: zipError }}>
-                Please Enter Valid Zipcode
+              <div className="bedBath">
+                <label htmlFor="beds">Beds: </label>
+                <select onChange={bedChange} id="beds" name="beds">
+                  <option></option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>1.5</option>
+                  <option>2</option>
+                  <option>2.5</option>
+                  <option>3</option>
+                  <option>3.5</option>
+                  <option>4</option>
+                  <option>4.5</option>
+                  <option>5</option>
+                  <option>5.5</option>
+                  <option>6</option>
+                </select>
+                <label htmlFor="baths">Baths: </label>
+                <select onChange={bathChange} id="baths" name="baths">
+                  <option></option>
+                  <option>0</option>
+                  <option>1</option>
+                  <option>1.5</option>
+                  <option>2</option>
+                  <option>2.5</option>
+                  <option>3</option>
+                  <option>3.5</option>
+                  <option>4</option>
+                  <option>4.5</option>
+                  <option>5</option>
+                  <option>5.5</option>
+                  <option>6</option>
+                </select>
               </div>
-              <div id="form-error3" style={{ visibility: noRes }}>
-                No Results. Try more options
-              </div>
-            </form>
-          </div>
-        </main>
-      ) : null}
-      {/* Button is shown once search for is submitted, to return the form (with refresh) */}
-      <button
-        className="w-100 btn btn-lg"
-        onClick={handleFormReset}
-        hidden={hideButton}
-      >
-        Search Again
-      </button>
+            </div>
+            <br />
+            <button className="w-100 btn btn-lg">Search</button>
+            <div id="form-error2" style={{ visibility: zipError }}>
+              Please Enter Valid Zipcode
+            </div>
+            <div id="form-error3" style={{ visibility: noRes }}>
+              No Results. Try more options
+            </div>
+          </form>
+        </div>
+      </main>
       {/* After Form Submission: Results Array (budgeted homes list) is displayed via State */}
-      {areResults !== false ? (
+      {resultsArr == null ? null : (
         <div id="results-div">{resultsArr}</div>
-      ) : null}
+      )}
     </div>
   );
 };

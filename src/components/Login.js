@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "../assets/css/Forms.css";
 
 const Login = () => {
+  const [error, setError] = useState("hidden");
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
+  const history = useHistory();
   const handleInputChange = (e) => {
-    // console.log("name:", e.target.name, "....value:", e.target.value);
+    // console.log("name:", e.target.name, e.target.value);
+    setError("hidden");
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -21,8 +25,17 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.success) {
+          sessionStorage.setItem("userData", JSON.stringify(data));
+          console.log("User data stored in session.");
+          history.push("/");
+          window.location.reload(false);
+        } else {
+          console.log("From Client: Session Check failed.");
+          setError("visible");
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((err) => console.log(err));
   };
   return (
     <div>
@@ -47,16 +60,16 @@ const Login = () => {
         >
           <div className="form-floating">
             <input
-              type="Email"
+              type="username"
               className="form-control"
               id="floatingInput"
-              name="email"
-              placeholder="Email"
-              autoComplete="Email"
+              name="username"
+              placeholder="Username"
+              autoComplete="username"
               required=""
               onChange={handleInputChange}
             />
-            <label htmlFor="floatingInput">Email</label>
+            <label htmlFor="floatingInput">Username</label>
           </div>
           <div className="form-floating">
             <input
@@ -97,6 +110,9 @@ const Login = () => {
           </button>
         </form>
       </main>
+      <div id="form-error2" style={{ visibility: error }}>
+        Please Try Again
+      </div>
     </div>
   );
 };

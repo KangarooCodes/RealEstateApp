@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../assets/css/NavBar.css";
 
 const NavBar = () => {
+  const [username, setUsername] = useState("Your Page!");
+  useEffect(() => {
+    const user = sessionStorage.getItem("userData");
+    if (sessionStorage.getItem("userData")?.includes("true")) {
+      setUsername(user.slice(28, -2));
+    }
+  }, []);
+  const [showLoggedIn, setShowLoggedIn] = useState("hidden");
+  const [hideLoggedIn, setHideLoggedIn] = useState("hidden");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("userData")?.includes("true")) {
+      // console.log(sessionStorage.getItem("userData"));
+      setShowLoggedIn("visible");
+      setHideLoggedIn("hidden");
+    } else {
+      setShowLoggedIn("hidden");
+      setHideLoggedIn("visible");
+    }
+  }, []);
+
   const history = useHistory();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,31 +37,18 @@ const NavBar = () => {
     e.preventDefault();
     history.push("/");
   };
-  const handleSupport = (e) => {
-    e.preventDefault();
-    history.push("/support");
-  };
-  const handleProfile = (e) => {
-    e.preventDefault();
-    history.push("/profile");
-  };
 
   return (
     <div className="navBar">
-      <a onClick={handleSignup} href="/signup">
+      <a className={hideLoggedIn} onClick={handleSignup} href="/signup">
         Sign-Up
       </a>
-      <a onClick={handleLogin} href="/login">
+      <a className={hideLoggedIn} onClick={handleLogin} href="/login">
         Login
       </a>
-      {/* <a onClick={handleSupport} href="/support">
-        Contact Admin
-      </a> */}
-      {/* <a onClick={handleProfile} href="/profile">
-        Profile
-      </a> */}
-      <a onClick={handleHome} href="/">
-        Home
+      <a href="/">Home</a>
+      <a className={showLoggedIn} href="/profile">
+        {username}
       </a>
     </div>
   );

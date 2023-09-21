@@ -23,7 +23,6 @@ const Result = (props) => {
               src={props.photo || noImg}
               // title="Add To Favorites!"
             ></CardImg>
-            <div className="fav"></div>
             {/* <div className="fav">❤️</div> */}
           </CardTitle>
           <div className="Card-Banner">

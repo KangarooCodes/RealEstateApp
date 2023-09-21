@@ -9,10 +9,16 @@
 	float: right;
 	box-shadow: 925px 0px 10px 1px black;
 }
-.navBar a:hover,.navBar a:active {
+.navBar a:hover {
 	text-decoration: underline;
 	text-underline-offset: 7px;
 	text-shadow: none;
 	color: white;
 	text-shadow: 1px 1px 3px black;
+}
+.hidden {
+	visibility: hidden;
+}
+.visible {
+	visibility: visible;
 }

@@ -1,21 +1,23 @@
 # Welcome To Joey's Real Estate App !
-### See below for previews of my app
-### Scroll further to see how to use the CRA to run this
-
-## Current Login Page:
-![](https://thumbnails-photos.amazon.com/v1/thumbnail/TvFDyUydSAesa6FmzD-jCQ?ownerId=A3Q37JPZZLXHPV&viewBox=1192%2C700&groupShareToken=L8n_4ePUT5edLC-rRz0T6A.iJfh_diWzbGG-X-206pHi4)
-
-## Current Home Page:
-![](https://thumbnails-photos.amazon.com/v1/thumbnail/jqBLFuGfTWeZGxxUhaODUQ?ownerId=A3Q37JPZZLXHPV&viewBox=954%2C700&groupShareToken=Me48oRjFQ6uqDUmjNCEP-Q.h_KXAn-A02dTGKxcOE31Tv)
+### See below to see how to use the CRA/SQL to run this
+### Scroll further for previews of my app
 
 To get this application running, make sure you do the following in the Terminal:
 
 1. `python3 -m venv venv`
 2. `source venv/bin/activate`
 3. `pip install -r requirements.txt`
-4. `sudo service postgresql start`
-5. `createdb real-estate-app`
-7. `flask run`
+4. `start postgresql server on port 5432`
+5. `create "real-estate-app" database`
+6. `flask run`
+7. `npm start`
+
+## Signup Page:
+![](https://thumbnails-photos.amazon.com/v1/thumbnail/uZBey1dJT-iQniGjZSB7FA?ownerId=A3Q37JPZZLXHPV&viewBox=847%2C700&groupShareToken=yuDUAFE8QWe02VsUCjLh2A.96Dd5xlipTxB8WA5iQS6HZ)
+
+## Current Home Page:
+![](https://thumbnails-photos.amazon.com/v1/thumbnail/s9hBl3O5Qfe349C-VHN-kQ?ownerId=A3Q37JPZZLXHPV&viewBox=861%2C700&groupShareToken=OZsIw1zrRcm2hmExYc_nog.rbNojEeR4L6hoB-z99BpXd)
+
 
 # Getting Started with Create React App
 

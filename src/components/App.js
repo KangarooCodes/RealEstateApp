@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import Home from "./Home";
-import Support from "./ContactAdmin";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
 
@@ -29,7 +28,6 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/" component={Home} />
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/support" component={Support} />
           <Redirect to="/" />
         </Switch>
       </header>

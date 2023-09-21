@@ -4,7 +4,7 @@ import bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
 from flask_session import Session
-from datetime import datetime, timedelta
+from datetime import timedelta
 app = Flask(__name__)
 
 CORS(app)
@@ -15,7 +15,6 @@ app.config['SECRET_KEY'] = "joeyssecret"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 app.app_context().push()
 Session(app)
 
@@ -39,8 +38,13 @@ def register():
     try:
         db.session.add(user)
         db.session.commit()
-        res = '{"message": "Registration successful"}'
-        return jsonify(res)
+
+        response = {
+            "success": False,
+            "username": username
+        }
+        response['success'] = True
+        return jsonify(response)
 
     except Exception as err:
         res = '{"error": "Registration error"}'
@@ -51,15 +55,20 @@ def register():
 @app.route('/api/login', methods=['POST'])
 def login():
     try:
-        email = request.json.get("email")
+        username = request.json.get("username")
         password = request.json.get("password")
         # record the users email in session
-        session["email"] = email
+        session["username"] = username
 
-        if not email or not password:
+        response = {
+            "success": False,
+            "username": username
+        }
+
+        if not username or not password:
             return jsonify("Form Not Complete"), 400
 
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
 
         if not user:
             return jsonify("User Not Found"), 404
@@ -68,17 +77,15 @@ def login():
             print('********************************')
             print('Login successful')
             print('********************************')
-            return jsonify('Login successful')
+            response['success'] = True
+            return jsonify(response)
         else:
-            return make_response(jsonify('Email and Password did not match'), 401)
+            return make_response(jsonify('Username and Password did not match'), 401)
 
     except Exception as err:
         print('********************************')
         print(err)
-    finally:
-        print('********************************')
-        print(password.encode('utf-8'), user.password.encode('utf-8'))
-        print('********************************')
+        return jsonify('Error Happened'), 400
 
 
 @app.route('/api/users')

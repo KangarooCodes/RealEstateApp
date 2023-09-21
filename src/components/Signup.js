@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "../assets/css/Forms.css";
 
 const Signup = () => {
+  const [error, setError] = useState("hidden");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
+  const history = useHistory();
   const handleInputChange = (e) => {
     // console.log("handleInputChange", e.target.name, e.target.value);
+    setError("hidden");
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -21,7 +25,15 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.success) {
+          sessionStorage.setItem("userData", JSON.stringify(data));
+          console.log("User Created.");
+          history.push("/");
+          window.location.reload(false);
+        } else {
+          console.log("From Client: Session Check failed.");
+          setError("visible");
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -74,10 +86,13 @@ const Signup = () => {
           </div>
           <br />
           <button className="w-100 btn btn-lg" type="submit">
-            Sign in
+            Create and Login
           </button>
         </form>
       </main>
+      <div id="form-error2" style={{ visibility: error }}>
+        Please Try Again
+      </div>
     </div>
   );
 };

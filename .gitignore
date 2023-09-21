@@ -6,6 +6,7 @@
 .pnp.js
 venv
 
+
 # testing
 /coverage
 
@@ -13,7 +14,8 @@ venv
 /build
 
 #API
-apykey.js
+# apykey.js
+/src/backend/flask_session
 
 # misc
 .DS_Store
