@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "Joey Rider",
+  "proxy": "http://localhost:5000",
   "repository": {
     "type": "git",
     "url": "https://github.com/KangarooCodes?tab=repositories"
@@ -67,6 +68,5 @@
   },
   "overrides": {
     "svgo": "3.0.2"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

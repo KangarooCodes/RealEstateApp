@@ -11,10 +11,10 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    password = db.Column(db.Binary(60), nullable=False)
-    name = db.Column(db.String(255), nullable=False)
-    property_id = db.Column(db.String(255))
+    email = db.Column(db.String(60), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    username = db.Column(db.String(60), nullable=False)
+    property_id = db.Column(db.String(60))
     # favorites = db.Column(db.String)
 
     def to_dict(self):
@@ -22,7 +22,15 @@ class User(db.Model):
         return {
             'id': self.id,
             'email': self.email,
-            'name': self.name,
+            'username': self.username,
+            'password': self.password
+        }
+
+    def is_active(self):
+        return {
+            'id': self.id,
+            'email': self.email,
+            'username': self.username,
             'password': self.password
         }
 
@@ -58,3 +66,4 @@ def connect_db(app):
 
     db.app = app
     db.init_app(app)
+    db.create_all()

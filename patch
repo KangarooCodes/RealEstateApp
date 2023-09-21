@@ -1,0 +1,195 @@
+diff --git a/package.json b/package.json
+index 490b054..3989101 100644
+--- a/package.json
++++ b/package.json
+@@ -3,6 +3,7 @@
+   "version": "0.1.0",
+   "private": true,
+   "author": "Joey Rider",
++  "proxy": "http://localhost:5000",
+   "repository": {
+     "type": "git",
+     "url": "https://github.com/KangarooCodes?tab=repositories"
+@@ -67,6 +68,5 @@
+   },
+   "overrides": {
+     "svgo": "3.0.2"
+-  },
+-  "proxy": "http://localhost:5000"
++  }
+ }
+diff --git a/src/backend/api.py b/src/backend/api.py
+index e0f3878..318086e 100644
+--- a/src/backend/api.py
++++ b/src/backend/api.py
+@@ -10,7 +10,6 @@ CORS(app)
+ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///real-estate-app'
+ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ app.config['SQLALCHEMY_ECHO'] = True
+-app.config['CORS_HEADERS'] = 'Content-Type'
+ 
+ db.init_app(app)
+ connect_db(app)
+@@ -27,26 +26,33 @@ def index():
+     return ()
+ 
+ 
+-@app.route('/api/register', methods=['GET', 'POST', "OPTIONS"])
++@app.route('/api/register', methods=['POST'])
+ def register():
+     email = request.json.get('email', None)
+     password = request.json.get('password', None)
+-    name = request.json.get('name', None)
++    username = request.json.get('username', None)
+ 
+     if not email:
+         return 'Missing Email!', 400
+     if not password:
+         return 'Missing Password!', 400
+-    if not name:
++    if not username:
+         return 'Missing Name!', 400
+ 
+     hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+-    user = User(email=email, password=hashed, name=name)
++    user = User(email=email, password=hashed, username=username)
+ 
+-    db.session.add(user)
+-    db.session.commit()
++    try:
++        db.session.add(user)
++        db.session.commit()
+ 
+-    return f"Welcome {name}!"
++        res = '{"message": "Registration successful"}'
++        return jsonify(res)
++
++    except Exception as e:
++    
++        res = '{"error": "Registration error"}'
++        return jsonify(res)
+ 
+ 
+ @app.route('/api/login', methods=['POST'])
+@@ -78,5 +84,4 @@ def login():
+ def get_users():
+     users = User.query.all()
+     users_json = [user.to_dict() for user in users]
+-    print(users_json)
+     return jsonify(users_json)
+diff --git a/src/backend/models.py b/src/backend/models.py
+index 9373fbf..295ab7d 100644
+--- a/src/backend/models.py
++++ b/src/backend/models.py
+@@ -9,13 +9,19 @@ class User(db.Model):
+     """Users"""
+ 
+     __tablename__ = 'users'
+-
+     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+-    email = db.Column(db.String(255), nullable=False, unique=True)
+-    password = db.Column(db.Binary(60), nullable=False)
+-    name = db.Column(db.String(255), nullable=False, unique=True)
+-    property_id = db.Column(db.String(255))
+-    # favorites = db.Column(db.String)
++    email = db.Column(db.String(60), unique=True)
++    mobile = db.Column(db.Integer, unique=True)
++    name = db.Column(db.String, nullable=False)
++    property_id = db.Column(db.String(10))
++    address_id = db.Column(db.String(10))
++    username = db.Column(db.String(25), nullable=False, unique=True)
++    image = db.Column(db.String)
++    password = db.Column(db.String(10), nullable=False)
++    bio = db.Column(db.String(200))
++    area = db.Column(db.Integer)
++    buyer_id = db.Column(db.Integer)
++    favorites = db.Column(db.String(10))
+ 
+     def to_dict(self):
+         """Return object data in easily serializable format"""
+diff --git a/src/components/Login.js b/src/components/Login.js
+index 1ab9c7f..eba171a 100644
+--- a/src/components/Login.js
++++ b/src/components/Login.js
+@@ -1,7 +1,14 @@
+-import React from "react";
++import React, { useState, useEffect } from "react";
+ import "../assets/css/Forms.css";
+ 
+ const Login = () => {
++  useEffect(() => {
++    fetch('/api/users')
++      .then(res => res.json())
++      .then(data => {
++	      console.log("data = ", data);
++      });
++  }, []);
+   const handleLoginSubmit = (e) => {
+     e.preventDefault();
+     fetch("http://localhost:5000/api/login", {
+diff --git a/src/components/Signup.js b/src/components/Signup.js
+index 0f57bed..599e142 100644
+--- a/src/components/Signup.js
++++ b/src/components/Signup.js
+@@ -1,10 +1,20 @@
+-import React from "react";
++import React, { useState, useEffect } from 'react';
+ import "../assets/css/Forms.css";
+ 
+ const Signup = () => {
++  const [formData, setFormData] = useState({
++	  username: '',
++	  email: '',
++	  password: ''
++  });
++  const handleInputChange = (e) => {
++	  console.log("handleInputChange", e.target.name, e.target.value);
++	const { name, value } = e.target;
++	setFormData({ ...formData, [name]: value });
++  };
+   const handleRegister = (e) => {
+     e.preventDefault();
+-    fetch("http://localhost:5000/api/users")
++    fetch("api/register", {method: "POST", headers: {'Content-Type':'application/json'}, body:JSON.stringify(formData)})
+       .then((res) => res.json())
+       .then((data) => {
+         console.log("data = ", data);
+@@ -20,9 +30,12 @@ const Signup = () => {
+               type="Email"
+               className="form-control"
+               id="floatingEmail"
++	      name="email"
+               placeholder="Email"
+               autoComplete="Email"
+               required=""
++	      value={formData.email}
++	      onChange={handleInputChange}
+             />
+             <label htmlFor="floatingInput">Email</label>
+           </div>
+@@ -31,9 +44,12 @@ const Signup = () => {
+               type="username"
+               className="form-control"
+               id="floatingUsername"
++	      name="username"
+               placeholder="Username"
+               autoComplete="Username"
+               required=""
++	      value={formData.username}
++	      onChange={handleInputChange}
+             />
+             <label htmlFor="floatingInput">Username</label>
+           </div>
+@@ -42,9 +58,12 @@ const Signup = () => {
+               type="password"
+               className="form-control"
+               id="floatingPassword"
++	      name="password"
+               placeholder="Password"
+               autoComplete="off"
+               required=""
++	      value={formData.password}
++	      onChange={handleInputChange}
+             />
+             <label htmlFor="floatingPassword">Password</label>
+           </div>

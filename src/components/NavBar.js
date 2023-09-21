@@ -33,9 +33,9 @@ const NavBar = () => {
       <a onClick={handleLogin} href="/login">
         Login
       </a>
-      <a onClick={handleSupport} href="/support">
+      {/* <a onClick={handleSupport} href="/support">
         Contact Admin
-      </a>
+      </a> */}
       {/* <a onClick={handleProfile} href="/profile">
         Profile
       </a> */}

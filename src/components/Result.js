@@ -46,9 +46,9 @@ const Result = (props) => {
               </span>{" "}
               sqft
               <br />
-              <a className="Card-Button" href={props.realtorLink}>
+              {/* <a className="Card-Button" href={props.realtorLink}>
                 Book Appointment
-              </a>
+              </a> */}
               <br />
               {props.street}
               <br />

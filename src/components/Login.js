@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/css/Forms.css";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleInputChange = (e) => {
+    // console.log("name:", e.target.name, "....value:", e.target.value);
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     fetch("http://localhost:5000/api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data = ", data);
+        console.log(data);
       })
       .catch((error) => console.log(error));
   };
@@ -42,9 +50,11 @@ const Login = () => {
               type="Email"
               className="form-control"
               id="floatingInput"
+              name="email"
               placeholder="Email"
               autoComplete="Email"
               required=""
+              onChange={handleInputChange}
             />
             <label htmlFor="floatingInput">Email</label>
           </div>
@@ -53,9 +63,11 @@ const Login = () => {
               type="password"
               className="form-control"
               id="floatingPassword"
+              name="password"
               placeholder="Password"
               autoComplete="off"
               required=""
+              onChange={handleInputChange}
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
@@ -68,6 +80,7 @@ const Login = () => {
                 value="1"
                 name="remember_me"
                 id="rememberMeSwitch"
+                onChange={handleInputChange}
               />
               <label
                 className="form-check-label"
